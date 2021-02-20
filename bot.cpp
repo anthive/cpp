@@ -18,8 +18,9 @@ int main(int argc, char* argv[])
   // initialize random number generator
   random_device rd;
   mt19937 mt(rd());
-  uniform_int_distribution<size_t> dist1(0, ACTIONS.size()-1); // pick random action from array on line 13
-  uniform_int_distribution<size_t> dist2(0, DIRECTIONS.size()-1); // pick random direction from array on line 14
+  
+   // pick random direction from array on line 14
+  uniform_int_distribution<size_t> dist2(0, DIRECTIONS.size()-1);
 
   // initialize the http server
   Server svr;
@@ -33,7 +34,7 @@ int main(int argc, char* argv[])
     for (auto& ant : hive["ants"].items()) {
       json order = {
         {"antId", ant.value()["id"] },
-        {"act", ACTIONS[dist1(mt)] },
+        {"act", "move" },
         {"dir", DIRECTIONS[dist2(mt)]}
       };
       // add order to your response object from line 32
